@@ -8,8 +8,8 @@ readme_1.rm
 prettyStudentPerformance.json
 
 #архивные данные
-./archive/
-./db_backup/
+/archive
+/db_backup
 
 #не использованные каталоги в структуре приложения
 ./internal/app/

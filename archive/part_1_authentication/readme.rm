@@ -1,0 +1,68 @@
+### Эскиз будующего README.RM
+
+* * * *
+#### Dockerfile:
+    При создании контейнера добавить в установку загрузку и запуск драйвера Playwright
+    Пример:
+    FROM golang:1.21
+    RUN go install github.com/playwright-community/playwright-go/cmd/playwright@latest
+    RUN playwright install
+
+    // Справочно: После установки драйвер помещается в: Linux/macOS: ~/.cache/ms-playwright/
+    // Ручная установка на локальной машине: go run github.com/playwright-community/playwright-go/cmd/playwright install
+
+* * * *
+#### CI/CD
+    - добавьте шаг установки драйвера Playwright перед запуском тестов
+
+* * * *
+#### DB
+    // Схема DB
+        https://app.database-design.ru/scheme/4857
+    // Дамп базы данных из DS
+        -- schools
+        CREATE TABLE schools (
+            id INT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL
+        );
+
+        -- subjects
+        CREATE TABLE subjects (
+            id INT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL  -- Исправлено
+        );
+
+        -- students
+        CREATE TABLE students (
+            id INT PRIMARY KEY,
+            full_name VARCHAR(100) NOT NULL,
+            school_id INT NOT NULL,
+            class_name VARCHAR(20) NOT NULL,
+            external_id VARCHAR(100),
+            FOREIGN KEY (school_id) REFERENCES schools(id) ON DELETE SET NULL
+        );
+
+        -- grades
+        CREATE TABLE grades (
+            id INT PRIMARY KEY,
+            student_id INT NOT NULL,
+            subject_id INT NOT NULL,
+            type VARCHAR(50) NOT NULL,
+            value FLOAT NOT NULL,
+            weight INT DEFAULT 1,
+            date DATE NOT NULL,
+            external_id VARCHAR(100),
+            FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+            FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+        );
+
+        -- average_grades
+        CREATE TABLE average_grades (
+            id INT PRIMARY KEY,
+            student_id INT NOT NULL,
+            subject_id INT NOT NULL,
+            average FLOAT NOT NULL,
+            last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Добавлено
+            FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+            FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+        );

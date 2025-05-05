@@ -1,0 +1,17 @@
+#файл паролей и примечаний
+secret.txt
+readme_1.rm
+
+#файлы данных ученика
+#response.json
+#student_info.json
+prettyStudentPerformance.json
+
+#архивные данные
+./archive/
+./db_backup/
+
+#не использованные каталоги в структуре приложения
+./internal/app/
+./internal/delivery/
+./internal/server/

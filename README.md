@@ -26,7 +26,7 @@
 #### Версии
 **Текущая версия - v0.0.1**
 Как работает, на текущий момент:
-- через playwright создается экземпляр браузера Chromium и страница авторизации - https://school.mos.ru
+- с помощью [playwright-go](github.com/playwright-community/playwright-go) создается экземпляр браузера Chromium и страница авторизации - https://school.mos.ru
 - средствами playwright имитируем клик кнопки войти
 - ждем редиректа на страницу авторизации через портал МОС.РУ по адресу - https://login.mos.ru/sps/login/methods/**
 - в соответствующие поля передаем значение login и password

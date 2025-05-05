@@ -1,7 +1,8 @@
 ### Schoollytics
 
-Schoollytics - сервис позволяющий анализировать успеваемость школьника на основании полученных оценок.
+**Schoollytics** - сервис позволяющий анализировать успеваемость школьника на основании полученных оценок.
 Сервис взаимодействует с личным кабинетом школьника в электронном дневнике Московской Электронной Школы (МЭШ) - https://school.mos.ru/
+
 После аутентификации сервис получает данные об успеваемости школьника в формате JSON и парсит их в базу данных.
 
 В дальнейшем, после доработки, Schoollytics позволит получать сводные отчеты и срезы данных по следующим параметрам и не только: 
@@ -23,7 +24,7 @@ Schoollytics - сервис позволяющий анализировать у
 
 * * * *
 #### Версии
-Текущая версия - v0.0.1
+**Текущая версия - v0.0.1**
 Как работает, на текущий момент:
 - через playwright создается экземпляр браузера Chromium и страница авторизации - https://school.mos.ru
 - средствами playwright имитируем клик кнопки войти
@@ -42,15 +43,15 @@ Schoollytics - сервис позволяющий анализировать у
 - база данных под управлением PostgreSQL работает только на локальной машине (будет исправлено)
 
 #### Структура
-`cmd`               
-    - main.go
-`internal`
-    `domain`            - структуры и конфигурационные файлы
-    `repository`        - функции работы с базой данных
-    `service`           - основная логика приложения
-`.env`                  - переменные окружения
-`response.json`         - json с оценками школьника
-`student_info.json`     - json с информацие о школьнике
+- `cmd/`                
+&nbsp;&nbsp;&nbsp;&nbsp; `main.go`  
+- `internal/`  
+&nbsp;&nbsp;&nbsp;&nbsp; `domain/`            - структуры и конфигурационные файлы  
+&nbsp;&nbsp;&nbsp;&nbsp; `repository/`        - функции работы с базой данных  
+&nbsp;&nbsp;&nbsp;&nbsp; `service/`           - основная логика приложения  
+- `.env`                  - переменные окружения  
+- `response.json`         - json с оценками школьника  
+- `student_info.json`     - json с информацие о школьнике  
 
 #### Запуск
 go run cmd/main.go 
@@ -59,8 +60,9 @@ go run cmd/main.go
 #### DB
 Схема БД - https://dbdesigner.page.link/JsCY2VXuUtUWk9Ky6
 
-Дамп БД, только схема
-        
+<details>
+<summary>Дамп БД, только схема</summary>
+    
         -- grades
         CREATE TABLE public.grades (
             id integer NOT NULL,
@@ -209,6 +211,7 @@ go run cmd/main.go
             ADD CONSTRAINT subjects_pkey PRIMARY KEY (id);
         ALTER TABLE ONLY public.subjects
             ADD CONSTRAINT unk_subjects_external_id UNIQUE (external_id);
+    </details>
 
 * * * *
 #### Планы на доработку
